@@ -1,4 +1,4 @@
-From 94fdb6ea61ea54b93be08e0c5ae12f6c57fe393f Mon Sep 17 00:00:00 2001
+From 70a38a5cc9f844aa92e1b005cb4b69ccfdf71826 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Steven!=20Ragnar=C3=B6k?= <steven@nuclearsandwich.com>
 Date: Sat, 17 Jun 2017 23:04:22 -0400
 Subject: [PATCH] Use explicit CMAKE_BUILD_TYPE=Release.
@@ -8,10 +8,10 @@ Subject: [PATCH] Use explicit CMAKE_BUILD_TYPE=Release.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/debian/rules.em b/debian/rules.em
-index fde12b1..f074d24 100755
+index f589242..a5e629e 100755
 --- a/debian/rules.em
 +++ b/debian/rules.em
-@@ -26,7 +26,7 @@ override_dh_auto_configure:
+@@ -31,7 +31,7 @@ override_dh_auto_configure:
  	# in the install tree that was dropped by catkin, and source it.  It will
  	# set things like CMAKE_PREFIX_PATH, PKG_CONFIG_PATH, and PYTHONPATH.
  	if [ -f "@(InstallationPrefix)/setup.sh" ]; then . "@(InstallationPrefix)/setup.sh"; fi && \
