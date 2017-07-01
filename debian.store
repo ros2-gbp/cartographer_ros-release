@@ -1,1 +1,1 @@
-{"parent": "release/r2b2/cartographer_ros", "base": "ba2de25", "trim": "", "trimbase": "", "previous": "5b3abc2"}
+{"previous": "2750695", "parent": "release/r2b2/cartographer_ros", "trimbase": "", "base": "065a679", "trim": ""}
