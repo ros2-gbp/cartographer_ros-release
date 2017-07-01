@@ -1,4 +1,4 @@
-From 70a38a5cc9f844aa92e1b005cb4b69ccfdf71826 Mon Sep 17 00:00:00 2001
+From bcabf0a62e3eb75b30b3f7f670a35d454ae91b36 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Steven!=20Ragnar=C3=B6k?= <steven@nuclearsandwich.com>
 Date: Sat, 17 Jun 2017 23:04:22 -0400
 Subject: [PATCH] Use explicit CMAKE_BUILD_TYPE=Release.
