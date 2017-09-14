@@ -1,4 +1,4 @@
-From 9e46afb61abc17a424c5618e29491d13a3ffc6d3 Mon Sep 17 00:00:00 2001
+From d125ab6e82ce2f3a71774e3f09a638f554f010d4 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Steven!=20Ragnar=C3=B6k?= <steven@nuclearsandwich.com>
 Date: Tue, 12 Sep 2017 11:42:34 -0400
 Subject: [PATCH] Use Release CMake configuration.
