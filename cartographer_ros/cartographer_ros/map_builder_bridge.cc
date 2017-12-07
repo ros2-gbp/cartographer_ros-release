@@ -115,9 +115,10 @@ bool MapBuilderBridge::HandleSubmapQuery(
   return true;
 }
 
-cartographer_ros_msgs::msg::SubmapList MapBuilderBridge::GetSubmapList() {
+cartographer_ros_msgs::msg::SubmapList MapBuilderBridge::GetSubmapList(
+    rclcpp::Clock::SharedPtr& clock) {
   cartographer_ros_msgs::msg::SubmapList submap_list;
-  submap_list.header.stamp = ::rclcpp::Time::now();
+  submap_list.header.stamp = clock->now();
   submap_list.header.frame_id = node_options_.map_frame;
   for (int trajectory_id = 0;
        trajectory_id < map_builder_.num_trajectory_builders();

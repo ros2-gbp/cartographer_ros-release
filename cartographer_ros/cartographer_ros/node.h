@@ -69,7 +69,7 @@ class Node {
   // Starts the first trajectory with the default topics.
   void StartTrajectoryWithDefaultTopics(const TrajectoryOptions& options);
 
-  rclcpp::node::Node::SharedPtr node_handle();
+  rclcpp::Node::SharedPtr node_handle();
   MapBuilderBridge* map_builder_bridge();
 
  private:
@@ -104,29 +104,32 @@ class Node {
   cartographer::common::Mutex mutex_;
   MapBuilderBridge map_builder_bridge_ GUARDED_BY(mutex_);
 
-  ::rclcpp::node::Node::SharedPtr node_handle_;
-  ::rclcpp::publisher::Publisher<::cartographer_ros_msgs::msg::SubmapList>::SharedPtr submap_list_publisher_;
-  // These rclcpp::service::ServiceBases need to live for the lifetime of the node.
-  std::vector<::rclcpp::service::ServiceBase::SharedPtr> service_servers_;
-  ::rclcpp::publisher::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr scan_matched_point_cloud_publisher_;
+  ::rclcpp::Node::SharedPtr node_handle_;
+  ::rclcpp::Publisher<::cartographer_ros_msgs::msg::SubmapList>::SharedPtr submap_list_publisher_;
+  // These rclcpp::ServiceBases need to live for the lifetime of the node.
+  std::vector<::rclcpp::ServiceBase::SharedPtr> service_servers_;
+  ::rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr scan_matched_point_cloud_publisher_;
   cartographer::common::Time last_scan_matched_point_cloud_time_ =
       cartographer::common::Time::min();
 
   // These are keyed with 'trajectory_id'.
-  std::unordered_map<int, ::rclcpp::subscription::SubscriptionBase::SharedPtr> laser_scan_subscribers_;
-  std::unordered_map<int, ::rclcpp::subscription::SubscriptionBase::SharedPtr> multi_echo_laser_scan_subscribers_;
-  std::unordered_map<int, ::rclcpp::subscription::SubscriptionBase::SharedPtr> odom_subscribers_;
-  std::unordered_map<int, ::rclcpp::subscription::SubscriptionBase::SharedPtr> imu_subscribers_;
-  std::unordered_map<int, std::vector<::rclcpp::subscription::SubscriptionBase::SharedPtr>>
+  std::unordered_map<int, ::rclcpp::SubscriptionBase::SharedPtr> laser_scan_subscribers_;
+  std::unordered_map<int, ::rclcpp::SubscriptionBase::SharedPtr> multi_echo_laser_scan_subscribers_;
+  std::unordered_map<int, ::rclcpp::SubscriptionBase::SharedPtr> odom_subscribers_;
+  std::unordered_map<int, ::rclcpp::SubscriptionBase::SharedPtr> imu_subscribers_;
+  std::unordered_map<int, std::vector<::rclcpp::SubscriptionBase::SharedPtr>>
       point_cloud_subscribers_;
   std::unordered_map<int, bool> is_active_trajectory_ GUARDED_BY(mutex_);
-  ::rclcpp::publisher::Publisher<::nav_msgs::msg::OccupancyGrid>::SharedPtr occupancy_grid_publisher_;
+  ::rclcpp::Publisher<::nav_msgs::msg::OccupancyGrid>::SharedPtr occupancy_grid_publisher_;
   std::thread occupancy_grid_thread_;
   bool terminating_ = false GUARDED_BY(mutex_);
 
-  // We have to keep the timer handles of ::rclcpp::timer::TimerBase around, otherwise
+  // We have to keep the timer handles of ::rclcpp::TimerBase around, otherwise
   // they do not fire.
-  std::vector<::rclcpp::timer::TimerBase::SharedPtr> wall_timers_;
+  std::vector<::rclcpp::TimerBase::SharedPtr> wall_timers_;
+
+  std::shared_ptr<rclcpp::TimeSource> ts_;
+  rclcpp::Clock::SharedPtr clock_;
 };
 
 }  // namespace cartographer_ros

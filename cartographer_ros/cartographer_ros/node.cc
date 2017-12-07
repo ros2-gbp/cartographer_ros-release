@@ -40,6 +40,11 @@
 
 #include <geometry_msgs/msg/transform_stamped.hpp>
 #include <nav_msgs/msg/odometry.hpp>
+#include <rclcpp/clock.hpp>
+#include <rclcpp/rclcpp.hpp>
+#include <rclcpp/time.hpp>
+#include <rclcpp/time_source.hpp>
+
 #include <sensor_msgs/msg/point_cloud2.hpp>
 #include <tf2_eigen/tf2_eigen.h>
 
@@ -73,7 +78,7 @@ bool FromRosMessage(const cartographer_ros_msgs::msg::TrajectoryOptions& msg,
   return true;
 }
 
-void ShutdownSubscriber(std::unordered_map<int, ::rclcpp::subscription::SubscriptionBase::SharedPtr>& subscribers,
+void ShutdownSubscriber(std::unordered_map<int, ::rclcpp::SubscriptionBase::SharedPtr>& subscribers,
                         int trajectory_id) {
   if (subscribers.count(trajectory_id) == 0) {
     return;
@@ -85,7 +90,7 @@ void ShutdownSubscriber(std::unordered_map<int, ::rclcpp::subscription::Subscrip
 
 bool IsTopicNameUnique(
     const string& topic,
-    const std::unordered_map<int, ::rclcpp::subscription::SubscriptionBase::SharedPtr>& subscribers) {
+    const std::unordered_map<int, ::rclcpp::SubscriptionBase::SharedPtr>& subscribers) {
   for (auto& entry : subscribers) {
     if (entry.second->get_topic_name() == topic) {
       LOG(ERROR) << "Topic name [" << topic << "] is already used.";
@@ -140,6 +145,10 @@ Node::Node(const NodeOptions& node_options, tf2_ros::Buffer* const tf_buffer)
   wall_timers_.push_back(node_handle_->create_wall_timer(
     std::chrono::milliseconds(int(node_options_.pose_publish_period_sec * 1000)),
     std::bind(&Node::PublishTrajectoryStates, this)));
+
+  ts_ = std::make_shared<rclcpp::TimeSource>(node_handle_);
+  clock_ = std::make_shared<rclcpp::Clock>(RCL_ROS_TIME);
+  ts_->attachClock(clock_);
 }
 
 Node::~Node() {
@@ -152,7 +161,7 @@ Node::~Node() {
   }
 }
 
-::rclcpp::node::Node::SharedPtr Node::node_handle() { return node_handle_; }
+::rclcpp::Node::SharedPtr Node::node_handle() { return node_handle_; }
 
 MapBuilderBridge* Node::map_builder_bridge() { return &map_builder_bridge_; }
 
@@ -165,7 +174,7 @@ void Node::HandleSubmapQuery(
 
 void Node::PublishSubmapList() {
   carto::common::MutexLocker lock(&mutex_);
-  submap_list_publisher_->publish(map_builder_bridge_.GetSubmapList());
+  submap_list_publisher_->publish(map_builder_bridge_.GetSubmapList(clock_));
 }
 
 void Node::PublishTrajectoryStates() {
@@ -194,7 +203,7 @@ void Node::PublishTrajectoryStates() {
     } else {
       // If we do not publish a new point cloud, we still allow time of the
       // published poses to advance.
-      stamped_transform.header.stamp = rclcpp::Time::now();
+      stamped_transform.header.stamp = clock_->now();
     }
 
     if (trajectory_state.published_to_tracking != nullptr) {
@@ -309,7 +318,7 @@ void Node::LaunchSubscribers(const TrajectoryOptions& options,
             }, custom_qos_profile);
   }
 
-  std::vector<::rclcpp::subscription::SubscriptionBase::SharedPtr> grouped_point_cloud_subscribers;
+  std::vector<::rclcpp::SubscriptionBase::SharedPtr> grouped_point_cloud_subscribers;
   if (options.num_point_clouds > 0) {
     for (int i = 0; i < options.num_point_clouds; ++i) {
       string topic = topics.point_cloud2_topic;
