@@ -1,1 +1,1 @@
-{"base": "eb4c4f3", "trimbase": "", "parent": "debian/ardent/cartographer_ros_msgs", "previous": "8c65f08", "trim": ""}
+{"parent": "debian/ardent/cartographer_ros_msgs", "trim": "", "trimbase": "", "previous": "74b2e1c", "base": "7fcc0be"}
