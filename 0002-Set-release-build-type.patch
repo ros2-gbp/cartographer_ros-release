@@ -1,4 +1,4 @@
-From 5e3ab96397e3ff0cae79978c601bcfeacef2f727 Mon Sep 17 00:00:00 2001
+From 54ef1499fd714c42bfa3011c9b60cb2ca49ef640 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Steven!=20Ragnar=C3=B6k?= <steven@nuclearsandwich.com>
 Date: Thu, 7 Dec 2017 08:13:25 -0800
 Subject: [PATCH 2/2] Set release build type.
