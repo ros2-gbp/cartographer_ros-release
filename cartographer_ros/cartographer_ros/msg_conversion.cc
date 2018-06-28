@@ -24,6 +24,7 @@
 
 #include "glog/logging.h"
 
+#include <geometry_msgs/msg/point.hpp>
 #include <geometry_msgs/msg/pose.hpp>
 #include <geometry_msgs/msg/quaternion.hpp>
 #include <geometry_msgs/msg/transform.hpp>
@@ -33,6 +34,7 @@
 #include <sensor_msgs/msg/laser_scan.hpp>
 #include <sensor_msgs/msg/multi_echo_laser_scan.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
+#include <sensor_msgs/msg/point_field.hpp>
 
 namespace cartographer_ros {
 
@@ -43,12 +45,11 @@ namespace {
 // properly.
 constexpr float kPointCloudComponentFourMagic = 1.;
 
-using ::cartographer::transform::Rigid3d;
-using ::cartographer::kalman_filter::PoseCovariance;
 using ::cartographer::sensor::PointCloudWithIntensities;
+using ::cartographer::transform::Rigid3d;
 
-sensor_msgs::msg::PointCloud2 PreparePointCloud2Message(const int64 timestamp,
-                                                   const string& frame_id,
+sensor_msgs::msg::PointCloud2 PreparePointCloud2Message(const int64_t timestamp,
+                                                   const std::string& frame_id,
                                                    const int num_points) {
   sensor_msgs::msg::PointCloud2 msg;
   msg.header.stamp = ToRos(::cartographer::common::FromUniversal(timestamp));
@@ -109,8 +110,10 @@ PointCloudWithIntensities LaserScanToPointCloudWithIntensities(
       const float first_echo = GetFirstEcho(echoes);
       if (msg.range_min <= first_echo && first_echo <= msg.range_max) {
         const Eigen::AngleAxisf rotation(angle, Eigen::Vector3f::UnitZ());
-        point_cloud.points.push_back(rotation *
-                                     (first_echo * Eigen::Vector3f::UnitX()));
+        Eigen::Vector4f point;
+        point << rotation * (first_echo * Eigen::Vector3f::UnitX()),
+            i * msg.time_increment;
+        point_cloud.points.push_back(point);
         if (msg.intensities.size() > 0) {
           CHECK_EQ(msg.intensities.size(), msg.ranges.size());
           const auto& echo_intensities = msg.intensities[i];
@@ -139,8 +142,8 @@ bool PointCloud2HasField(const sensor_msgs::msg::PointCloud2& pc2,
 }  // namespace
 
 sensor_msgs::msg::PointCloud2 ToPointCloud2Message(
-    const int64 timestamp, const string& frame_id,
-    const ::cartographer::sensor::PointCloud& point_cloud) {
+    const int64_t timestamp, const std::string& frame_id,
+    const ::cartographer::sensor::TimedPointCloud& point_cloud) {
   auto msg = PreparePointCloud2Message(timestamp, frame_id, point_cloud.size());
 
   size_t offset = 0;
@@ -174,7 +177,7 @@ PointCloudWithIntensities ToPointCloudWithIntensities(
     pcl::PointCloud<pcl::PointXYZI> pcl_point_cloud;
     pcl::fromROSMsg(message, pcl_point_cloud);
     for (const auto& point : pcl_point_cloud) {
-      point_cloud.points.emplace_back(point.x, point.y, point.z);
+      point_cloud.points.emplace_back(point.x, point.y, point.z, 0.f);
       point_cloud.intensities.push_back(point.intensity);
     }
   } else {
@@ -184,7 +187,7 @@ PointCloudWithIntensities ToPointCloudWithIntensities(
     // If we don't have an intensity field, just copy XYZ and fill in
     // 1.0.
     for (const auto& point : pcl_point_cloud) {
-      point_cloud.points.emplace_back(point.x, point.y, point.z);
+      point_cloud.points.emplace_back(point.x, point.y, point.z, 0.f);
       point_cloud.intensities.push_back(1.0);
     }
   }
@@ -210,10 +213,6 @@ Eigen::Quaterniond ToEigen(const geometry_msgs::msg::Quaternion& quaternion) {
                             quaternion.z);
 }
 
-PoseCovariance ToPoseCovariance(const std::array<double, 36>& covariance) {
-  return Eigen::Map<const Eigen::Matrix<double, 6, 6>>(covariance.data());
-}
-
 geometry_msgs::msg::Transform ToGeometryMsgTransform(const Rigid3d& rigid3d) {
   geometry_msgs::msg::Transform transform;
   transform.translation.x = rigid3d.translation().x();
@@ -228,14 +227,20 @@ geometry_msgs::msg::Transform ToGeometryMsgTransform(const Rigid3d& rigid3d) {
 
 geometry_msgs::msg::Pose ToGeometryMsgPose(const Rigid3d& rigid3d) {
   geometry_msgs::msg::Pose pose;
-  pose.position.x = rigid3d.translation().x();
-  pose.position.y = rigid3d.translation().y();
-  pose.position.z = rigid3d.translation().z();
+  pose.position = ToGeometryMsgPoint(rigid3d.translation());
   pose.orientation.w = rigid3d.rotation().w();
   pose.orientation.x = rigid3d.rotation().x();
   pose.orientation.y = rigid3d.rotation().y();
   pose.orientation.z = rigid3d.rotation().z();
   return pose;
+}
+
+geometry_msgs::msg::Point ToGeometryMsgPoint(const Eigen::Vector3d& vector3d) {
+  geometry_msgs::msg::Point point;
+  point.x = vector3d.x();
+  point.y = vector3d.y();
+  point.z = vector3d.z();
+  return point;
 }
 
 }  // namespace cartographer_ros

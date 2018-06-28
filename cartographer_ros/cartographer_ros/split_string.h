@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-#ifndef CARTOGRAPHER_ROS_MAP_WRITER_H_
-#define CARTOGRAPHER_ROS_MAP_WRITER_H_
+#ifndef CARTOGRAPHER_ROS_SPLIT_STRING_H_
+#define CARTOGRAPHER_ROS_SPLIT_STRING_H_
 
 #include <string>
-
-#include <nav_msgs/msg/occupancy_grid.hpp>
+#include <vector>
 
 namespace cartographer_ros {
 
-// Writes the given 'occupancy_grid' as 'stem'.pgm and 'stem'.yaml.
-void WriteOccupancyGridToPgmAndYaml(
-    const ::nav_msgs::msg::OccupancyGrid& occupancy_grid, const std::string& stem);
+// Split 'input' at 'delimiter'.
+std::vector<std::string> SplitString(const std::string& input, char delimiter);
 
 }  // namespace cartographer_ros
 
-#endif  // CARTOGRAPHER_ROS_MAP_WRITER_H_
+#endif  // CARTOGRAPHER_ROS_SPLIT_STRING_H_

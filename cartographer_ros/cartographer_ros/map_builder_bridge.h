@@ -18,6 +18,7 @@
 #define CARTOGRAPHER_ROS_MAP_BUILDER_BRIDGE_H_
 
 #include <memory>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -32,6 +33,9 @@
 #include "cartographer_ros_msgs/srv/submap_query.hpp"
 
 #include <nav_msgs/msg/occupancy_grid.hpp>
+
+#include "visualization_msgs/msg/marker_array.hpp"
+
 #include <rclcpp/clock.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/time.hpp>
@@ -42,7 +46,15 @@ namespace cartographer_ros {
 class MapBuilderBridge {
  public:
   struct TrajectoryState {
-    cartographer::mapping::TrajectoryBuilder::PoseEstimate pose_estimate;
+    // Contains the trajectory state data received from local SLAM, after
+    // it had processed accumulated 'range_data_in_local' and estimated
+    // current 'local_pose' at 'time'.
+    struct LocalSlamData {
+      ::cartographer::common::Time time;
+      ::cartographer::transform::Rigid3d local_pose;
+      ::cartographer::sensor::RangeData range_data_in_local;
+    };
+    std::shared_ptr<const LocalSlamData> local_slam_data;
     cartographer::transform::Rigid3d local_to_map;
     std::unique_ptr<cartographer::transform::Rigid3d> published_to_tracking;
     TrajectoryOptions trajectory_options;
@@ -53,23 +65,30 @@ class MapBuilderBridge {
   MapBuilderBridge(const MapBuilderBridge&) = delete;
   MapBuilderBridge& operator=(const MapBuilderBridge&) = delete;
 
-  int AddTrajectory(const std::unordered_set<string>& expected_sensor_ids,
+  void LoadMap(const std::string& map_filename);
+  int AddTrajectory(const std::unordered_set<std::string>& expected_sensor_ids,
                     const TrajectoryOptions& trajectory_options);
   void FinishTrajectory(int trajectory_id);
-  void WriteAssets(const string& stem);
+  void RunFinalOptimization();
+  void SerializeState(const std::string& filename);
 
   bool HandleSubmapQuery(
       const std::shared_ptr<::cartographer_ros_msgs::srv::SubmapQuery::Request> request,
       std::shared_ptr<::cartographer_ros_msgs::srv::SubmapQuery::Response> response);
 
   cartographer_ros_msgs::msg::SubmapList GetSubmapList(rclcpp::Clock::SharedPtr& clock);
-  std::unique_ptr<nav_msgs::msg::OccupancyGrid> BuildOccupancyGrid();
-  std::unordered_map<int, TrajectoryState> GetTrajectoryStates();
+  std::unordered_map<int, TrajectoryState> GetTrajectoryStates()
+      EXCLUDES(mutex_);
+  visualization_msgs::msg::MarkerArray GetTrajectoryNodeList(rclcpp::Clock::SharedPtr& clock);
+  visualization_msgs::msg::MarkerArray GetConstraintList(rclcpp::Clock::SharedPtr& clock);
 
   SensorBridge* sensor_bridge(int trajectory_id);
 
  private:
+  cartographer::common::Mutex mutex_;
   const NodeOptions node_options_;
+  std::unordered_map<int, std::shared_ptr<const TrajectoryState::LocalSlamData>>
+      trajectory_state_data_ GUARDED_BY(mutex_);
   cartographer::mapping::MapBuilder map_builder_;
   tf2_ros::Buffer* const tf_buffer_;
 
