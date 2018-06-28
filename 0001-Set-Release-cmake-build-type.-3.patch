@@ -1,0 +1,27 @@
+From 6400dc011ce444b21b579f0cec613fc861658fd5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Steven!=20Ragnar=C3=B6k?=
+ <nuclearsandwich@users.noreply.github.com>
+Date: Thu, 28 Jun 2018 09:51:46 -0700
+Subject: [PATCH] Set Release cmake build type. (#3)
+
+---
+ debian/rules.em | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/debian/rules.em b/debian/rules.em
+index 9c9604d..ab1dcaa 100755
+--- a/debian/rules.em
++++ b/debian/rules.em
+@@ -28,7 +28,8 @@ override_dh_auto_configure:
+ 	if [ -f "@(InstallationPrefix)/setup.sh" ]; then . "@(InstallationPrefix)/setup.sh"; fi && \
+ 	dh_auto_configure -- \
+ 		-DCMAKE_INSTALL_PREFIX="@(InstallationPrefix)" \
+-		-DAMENT_PREFIX_PATH="@(InstallationPrefix)"
++		-DAMENT_PREFIX_PATH="@(InstallationPrefix)" \
++		-DCMAKE_BUILD_TYPE=Release
+ 
+ override_dh_auto_build:
+ 	# In case we're installing to a non-standard location, look for a setup.sh
+-- 
+2.7.4
+
