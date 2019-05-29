@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-#ifndef CARTOGRAPHER_ROS_TF_BRIDGE_H_
-#define CARTOGRAPHER_ROS_TF_BRIDGE_H_
+#ifndef CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_TF_BRIDGE_H
+#define CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_TF_BRIDGE_H
 
 #include <memory>
 
 #include "cartographer/transform/rigid_transform.h"
-#include "cartographer_ros/time_conversion.h"
+#include "tf2_ros/buffer.h"
 
-#include <tf2_ros/buffer.h>
+#include "cartographer_ros/time_conversion.h"
 
 namespace cartographer_ros {
 
@@ -48,4 +48,4 @@ class TfBridge {
 
 }  // namespace cartographer_ros
 
-#endif  // CARTOGRAPHER_ROS_TF_BRIDGE_H_
+#endif  // CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_TF_BRIDGE_H

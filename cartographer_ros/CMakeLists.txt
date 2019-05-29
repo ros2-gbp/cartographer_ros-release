@@ -30,6 +30,7 @@ endif()
 find_package(cartographer REQUIRED)
 include("${CARTOGRAPHER_CMAKE_DIR}/functions.cmake")
 set(BUILD_SHARED_LIBS OFF)
+option(BUILD_GRPC "build features that require Cartographer gRPC support" false)
 
 google_initialize_cartographer_project()
 # google_enable_testing()
@@ -50,13 +51,10 @@ find_package(visualization_msgs REQUIRED)
 
 include(FindPkgConfig)
 
-
-find_package(console_bridge REQUIRED)
 find_package(LuaGoogle REQUIRED)
 find_package(PCL REQUIRED COMPONENTS common)
 find_package(Eigen3 REQUIRED)
 # find_package(Boost REQUIRED COMPONENTS system iostreams)
-
 find_package(urdfdom_headers REQUIRED)
 
 if(DEFINED urdfdom_headers_VERSION)
@@ -73,7 +71,7 @@ include_directories(
   ${geometry_msgs_INCLUDE_DIRS}
   ${nav_msgs_INCLUDE_DIRS}
   ${pcl_conversions_INCLUDE_DIRS}
-  # ${rclcpp_INCLUDE_DIRS}
+  ${rclcpp_INCLUDE_DIRS}
   ${sensor_msgs_INCLUDE_DIRS}
   ${std_msgs_INCLUDE_DIRS}
   ${tf2_INCLUDE_DIRS}
@@ -105,11 +103,11 @@ set(ALL_SRCS
   "cartographer_ros/tf_bridge.cc"
   "cartographer_ros/time_conversion.cc"
   "cartographer_ros/trajectory_options.cc"
+  "cartographer_ros/submap.cc"
   )
 add_library(${PROJECT_NAME} ${ALL_SRCS})
 add_subdirectory("cartographer_ros")
 
-# Cartographer
 target_link_libraries(${PROJECT_NAME} PUBLIC cartographer)
 
 # Lua
@@ -118,7 +116,12 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${LUA_INCLUDE_DIR})
 # PCL
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${PCL_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PCL_LIBRARIES})
+set(BLACKLISTED_PCL_DEFINITIONS " -march=native -msse4.2 -mfpmath=sse ")
 foreach(DEFINITION ${PCL_DEFINITIONS})
+  list (FIND BLACKLISTED_PCL_DEFINITIONS "${DEFINITION}" DEFINITIONS_INDEX)
+  if (${DEFINITIONS_INDEX} GREATER -1)
+    continue()
+  endif()
   set(TARGET_COMPILE_FLAGS "${TARGET_COMPILE_FLAGS} ${DEFINITION}")
 endforeach()
 

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef CARTOGRAPHER_ROS_NODE_OPTIONS_H_
-#define CARTOGRAPHER_ROS_NODE_OPTIONS_H_
+#ifndef CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_NODE_OPTIONS_H
+#define CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_NODE_OPTIONS_H
 
 #include <string>
 #include <tuple>
@@ -24,6 +24,8 @@
 #include "cartographer/common/port.h"
 #include "cartographer/mapping/proto/map_builder_options.pb.h"
 #include "cartographer_ros/trajectory_options.h"
+
+#include <rclcpp/time.hpp>
 
 namespace cartographer_ros {
 
@@ -46,4 +48,4 @@ std::tuple<NodeOptions, TrajectoryOptions> LoadOptions(
 
 }  // namespace cartographer_ros
 
-#endif  // CARTOGRAPHER_ROS_NODE_OPTIONS_H_
+#endif  // CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_NODE_OPTIONS_H

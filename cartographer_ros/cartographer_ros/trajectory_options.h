@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-#ifndef CARTOGRAPHER_ROS_TRAJECTORY_OPTIONS_H_
-#define CARTOGRAPHER_ROS_TRAJECTORY_OPTIONS_H_
+#ifndef CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_TRAJECTORY_OPTIONS_H
+#define CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_TRAJECTORY_OPTIONS_H
 
 #include <string>
 
 #include "cartographer/common/lua_parameter_dictionary.h"
 #include "cartographer/common/port.h"
 #include "cartographer/mapping/proto/trajectory_builder_options.pb.h"
-#include "cartographer_ros_msgs/msg/trajectory_options.hpp"
+#include <cartographer_ros_msgs/msg/trajectory_options.hpp>
+
+#include <rclcpp/time.hpp>
 
 namespace cartographer_ros {
 
@@ -34,17 +36,32 @@ struct TrajectoryOptions {
   std::string odom_frame;
   bool provide_odom_frame;
   bool use_odometry;
+  bool use_nav_sat;
+  bool use_landmarks;
+  bool publish_frame_projected_to_2d;
   int num_laser_scans;
   int num_multi_echo_laser_scans;
   int num_subdivisions_per_laser_scan;
   int num_point_clouds;
   double rangefinder_sampling_ratio;
   double odometry_sampling_ratio;
+  double fixed_frame_pose_sampling_ratio;
   double imu_sampling_ratio;
+  double landmarks_sampling_ratio;
 };
+
+::cartographer::mapping::proto::InitialTrajectoryPose
+CreateInitialTrajectoryPose(
+    ::cartographer::common::LuaParameterDictionary* lua_parameter_dictionary,
+    ::rclcpp::Time node_time);
 
 TrajectoryOptions CreateTrajectoryOptions(
     ::cartographer::common::LuaParameterDictionary* lua_parameter_dictionary);
+
+TrajectoryOptions CreateTrajectoryOptions(
+    ::cartographer::common::LuaParameterDictionary* lua_parameter_dictionary,
+    ::cartographer::common::LuaParameterDictionary* initial_trajectory_pose,
+    ::rclcpp::Time node_time);
 
 // Try to convert 'msg' into 'options'. Returns false on failure.
 bool FromRosMessage(const cartographer_ros_msgs::msg::TrajectoryOptions& msg,
@@ -56,4 +73,4 @@ cartographer_ros_msgs::msg::TrajectoryOptions ToRosMessage(
 
 }  // namespace cartographer_ros
 
-#endif  // CARTOGRAPHER_ROS_TRAJECTORY_OPTIONS_H_
+#endif  // CARTOGRAPHER_ROS_CARTOGRAPHER_ROS_TRAJECTORY_OPTIONS_H
