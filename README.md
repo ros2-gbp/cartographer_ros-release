@@ -1,3 +1,31 @@
+## cartographer_ros (eloquent) - 1.0.9000-1
+
+The packages in the `cartographer_ros` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --track eloquent --rosdistro eloquent cartographer_ros` on `Wed, 23 Oct 2019 16:44:47 -0000`
+
+These packages were released:
+- `cartographer_ros`
+- `cartographer_ros_msgs`
+
+These packages were explicitly ignored:
+- `cartographer_rviz`
+
+Version of package(s) in repository `cartographer_ros`:
+
+- upstream repository: https://github.com/ros2/cartographer_ros.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `1.0.9000-1`
+
+Versions of tools used:
+
+- bloom version: `0.8.0`
+- catkin_pkg version: `0.4.13`
+- rosdep version: `0.16.1`
+- rosdistro version: `0.7.5`
+- vcstools version: `0.1.42`
+
+
 ## cartographer_ros (dashing) - 1.0.9000-1
 
 The packages in the `cartographer_ros` repository were released into the `dashing` distro by running `/usr/bin/bloom-release --rosdistro dashing --track dashing cartographer_ros` on `Tue, 03 Sep 2019 13:35:44 -0000`
