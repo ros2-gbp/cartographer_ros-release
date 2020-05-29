@@ -1,3 +1,28 @@
+## cartographer_ros (foxy) - 1.0.9001-1
+
+The packages in the `cartographer_ros` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --track foxy --rosdistro foxy cartographer_ros` on `Fri, 29 May 2020 20:55:40 -0000`
+
+These packages were released:
+- `cartographer_ros`
+- `cartographer_ros_msgs`
+
+Version of package(s) in repository `cartographer_ros`:
+
+- upstream repository: https://github.com/ros2/cartographer_ros.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `1.0.9001-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.7`
+- catkin_pkg version: `0.4.20`
+- rosdep version: `0.19.0`
+- rosdistro version: `0.8.2`
+- vcstools version: `0.1.42`
+
+
 ## cartographer_ros (eloquent) - 1.0.9001-1
 
 The packages in the `cartographer_ros` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --track eloquent --rosdistro eloquent cartographer_ros` on `Thu, 06 Feb 2020 15:10:48 -0000`
