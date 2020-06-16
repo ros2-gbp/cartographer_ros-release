@@ -1,0 +1,25 @@
+ros-rolling-cartographer-ros-msgs (1.0.9001-2focal) focal; urgency=high
+
+
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 06 Feb 2020 05:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (0.3.0-2focal) focal; urgency=high
+
+  * https://github.com/googlecartographer/cartographer_ros/compare/0.2.0...0.3.0
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 23 Nov 2017 05:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (0.2.0-2focal) focal; urgency=high
+
+  * https://github.com/googlecartographer/cartographer_ros/compare/0.1.0...0.2.0
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Mon, 19 Jun 2017 04:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (0.1.0-2focal) focal; urgency=high
+
+  * First unstable development release
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 18 May 2017 04:00:00 -0000
+
+
