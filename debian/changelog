@@ -1,0 +1,43 @@
+ros-rolling-cartographer-ros-msgs (1.0.9004-2bullseye) bullseye; urgency=high
+
+
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 28 Oct 2021 07:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (1.0.9003-2bullseye) bullseye; urgency=high
+
+
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Mon, 25 Jan 2021 08:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (1.0.9002-2bullseye) bullseye; urgency=high
+
+
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Fri, 30 Oct 2020 07:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (1.0.9001-2bullseye) bullseye; urgency=high
+
+
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 06 Feb 2020 08:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (0.3.0-2bullseye) bullseye; urgency=high
+
+  * https://github.com/googlecartographer/cartographer_ros/compare/0.2.0...0.3.0
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 23 Nov 2017 08:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (0.2.0-2bullseye) bullseye; urgency=high
+
+  * https://github.com/googlecartographer/cartographer_ros/compare/0.1.0...0.2.0
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Mon, 19 Jun 2017 07:00:00 -0000
+
+ros-rolling-cartographer-ros-msgs (0.1.0-2bullseye) bullseye; urgency=high
+
+  * First unstable development release
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 18 May 2017 07:00:00 -0000
+
+
