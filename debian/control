@@ -1,0 +1,13 @@
+Source: ros-rolling-cartographer-ros
+Section: misc
+Priority: optional
+Maintainer: Chris Lalancette <clalancette@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), libeigen3-dev, liblua5.2-dev, libpcl-dev, libyaml-cpp-dev, ros-rolling-ament-cmake, ros-rolling-cartographer, ros-rolling-cartographer-ros-msgs, ros-rolling-nav-msgs, ros-rolling-pcl-conversions, ros-rolling-rclcpp, ros-rolling-sensor-msgs, ros-rolling-tf2, ros-rolling-tf2-eigen, ros-rolling-tf2-msgs, ros-rolling-tf2-ros, ros-rolling-urdfdom-headers, ros-rolling-visualization-msgs, ros-rolling-ros-workspace
+Homepage: https://github.com/ros2/cartographer_ros
+Standards-Version: 3.9.2
+
+Package: ros-rolling-cartographer-ros
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, liblua5.2-dev, libpcl-dev, libyaml-cpp-dev, ros-rolling-cartographer, ros-rolling-cartographer-ros-msgs, ros-rolling-nav-msgs, ros-rolling-rclcpp, ros-rolling-sensor-msgs, ros-rolling-tf2, ros-rolling-tf2-msgs, ros-rolling-tf2-ros, ros-rolling-visualization-msgs, ros-rolling-ros-workspace
+Description: Cartographer is a system that provides real-time simultaneous localization and mapping (SLAM) in 2D and 3D across multiple platforms and sensor configurations.
+ This package provides Cartographer's ROS integration.

@@ -1,0 +1,57 @@
+ros-rolling-cartographer-ros (1.0.9004-2bullseye) bullseye; urgency=high
+
+  * add pbstream_to_ros_map_node (#54 <https://github.com/ros2/cartographer_ros/issues/54>)
+  * Use the non-deprecated tf2_eigen.hpp header. (#55 <https://github.com/ros2/cartographer_ros/issues/55>)
+  * Contributors: Chris Lalancette, Liangqian
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 28 Oct 2021 07:00:00 -0000
+
+ros-rolling-cartographer-ros (1.0.9003-2bullseye) bullseye; urgency=high
+
+  * Switch to using a C-style string for RCLCPP macros.
+  * Cleanup the CMakeLists.txt.
+  * Contributors: Chris Lalancette
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Mon, 25 Jan 2021 08:00:00 -0000
+
+ros-rolling-cartographer-ros (1.0.9002-2bullseye) bullseye; urgency=high
+
+  * Handle multiple ROS messages with the same timestamp (#46 <https://github.com/ros2/cartographer_ros/issues/46>)
+  * Contributors: Michel Hidalgo
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Fri, 30 Oct 2020 07:00:00 -0000
+
+ros-rolling-cartographer-ros (1.0.9001-2bullseye) bullseye; urgency=high
+
+  * Init rclcpp first (#41 <https://github.com/ros2/cartographer_ros/issues/41>)
+  * Strip ROS args before passing to GFlags (#40 <https://github.com/ros2/cartographer_ros/issues/40>)
+  * Fix argument intiialization to allow node to take in params (#39 <https://github.com/ros2/cartographer_ros/issues/39>)
+  * Contributors: Emerson Knapp, Shane Loretz
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 06 Feb 2020 08:00:00 -0000
+
+ros-rolling-cartographer-ros (1.0.0-2bullseye) bullseye; urgency=high
+
+  * https://github.com/googlecartographer/cartographer_ros/compare/0.3.0...1.0.0
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Fri, 01 Jun 2018 07:00:00 -0000
+
+ros-rolling-cartographer-ros (0.3.0-2bullseye) bullseye; urgency=high
+
+  * https://github.com/googlecartographer/cartographer_ros/compare/0.2.0...0.3.0
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 23 Nov 2017 08:00:00 -0000
+
+ros-rolling-cartographer-ros (0.2.0-2bullseye) bullseye; urgency=high
+
+  * https://github.com/googlecartographer/cartographer_ros/compare/0.1.0...0.2.0
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Mon, 19 Jun 2017 07:00:00 -0000
+
+ros-rolling-cartographer-ros (0.1.0-2bullseye) bullseye; urgency=high
+
+  * First unstable development release
+
+ -- Chris Lalancette <clalancette@openrobotics.org>  Thu, 18 May 2017 07:00:00 -0000
+
+
