@@ -216,7 +216,7 @@ tracks:
     last_version: 1.0.9004
     name: cartographer_ros
     patches: null
-    release_inc: '1'
+    release_inc: '2'
     release_repo_url: https://github.com/ros2-gbp/cartographer_ros-release.git
     release_tag: :{version}
     ros_distro: rolling
