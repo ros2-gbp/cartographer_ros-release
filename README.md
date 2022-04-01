@@ -1,3 +1,29 @@
+## cartographer_ros (rolling) - 2.0.9000-1
+
+The packages in the `cartographer_ros` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --track rolling --rosdistro rolling cartographer_ros` on `Fri, 01 Apr 2022 13:39:05 -0000`
+
+These packages were released:
+- `cartographer_ros`
+- `cartographer_ros_msgs`
+- `cartographer_rviz`
+
+Version of package(s) in repository `cartographer_ros`:
+
+- upstream repository: https://github.com/ros2/cartographer_ros.git
+- release repository: https://github.com/ros2-gbp/cartographer_ros-release.git
+- rosdistro version: `1.0.9004-2`
+- old version: `1.0.9004-2`
+- new version: `2.0.9000-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.24`
+- rosdep version: `0.21.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## cartographer_ros (rolling) - 1.0.9004-1
 
 The packages in the `cartographer_ros` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --track rolling --rosdistro rolling cartographer_ros` on `Thu, 28 Oct 2021 19:41:14 -0000`
