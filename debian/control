@@ -1,0 +1,13 @@
+Source: ros-humble-cartographer-rviz
+Section: misc
+Priority: optional
+Maintainer: Chris Lalancette <clalancette@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), libabsl-dev, libboost-iostreams-dev, libeigen3-dev, ros-humble-ament-cmake, ros-humble-cartographer, ros-humble-cartographer-ros, ros-humble-cartographer-ros-msgs, ros-humble-pluginlib, ros-humble-rclcpp, ros-humble-rviz-common, ros-humble-rviz-ogre-vendor, ros-humble-rviz-rendering, ros-humble-ros-workspace
+Homepage: https://github.com/cartographer-project/cartographer_ros
+Standards-Version: 3.9.2
+
+Package: ros-humble-cartographer-rviz
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libabsl-dev, libboost-iostreams-dev, libeigen3-dev, ros-humble-cartographer, ros-humble-cartographer-ros, ros-humble-cartographer-ros-msgs, ros-humble-pluginlib, ros-humble-rclcpp, ros-humble-rviz-common, ros-humble-rviz-ogre-vendor, ros-humble-rviz-rendering, ros-humble-ros-workspace
+Description: Cartographer is a system that provides real-time simultaneous localization and mapping (SLAM) in 2D and 3D across multiple platforms and sensor configurations.
+ This package provides Cartographer's RViz integration.
