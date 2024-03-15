@@ -165,10 +165,10 @@ tracks:
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc} --os-name rhel
     devel_branch: ros2
-    last_version: 2.0.9000
+    last_version: 2.0.9002
     name: cartographer_ros
     patches: null
-    release_inc: '2'
+    release_inc: '1'
     release_repo_url: https://github.com/ros2-gbp/cartographer_ros-release.git
     release_tag: :{version}
     ros_distro: humble
