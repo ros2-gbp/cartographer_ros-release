@@ -2,6 +2,9 @@
 Changelog for package cartographer_rviz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.0.9003 (2024-04-17)
+---------------------
+
 2.0.9002 (2024-03-15)
 ---------------------
 * Fix a warning when building against newer Ogre.
