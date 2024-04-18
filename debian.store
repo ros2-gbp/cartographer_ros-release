@@ -1,1 +1,1 @@
-{"base": "b2dc8d5", "parent": "debian/rolling/cartographer_rviz", "previous": "de893f4", "trim": "", "trimbase": ""}
+{"base": "45ad407", "parent": "debian/jazzy/cartographer_rviz", "previous": "76c2faf", "trim": "", "trimbase": ""}
