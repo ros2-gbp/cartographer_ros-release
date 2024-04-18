@@ -1,0 +1,13 @@
+Source: ros-jazzy-cartographer-ros
+Section: misc
+Priority: optional
+Maintainer: Chris Lalancette <clalancette@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ament-cmake, google-mock, libabsl-dev, libeigen3-dev, libgeometry-msgs-dev, libgflags-dev, libgoogle-glog-dev, libnav-msgs-dev, libpcl-conversions-dev, libpcl-dev, libsensor-msgs-dev, libstd-msgs-dev, libtf2-dev, libtf2-eigen-dev, libtf2-msgs-dev, libtf2-ros-dev, liburdf-dev, libvisualization-msgs-dev, python3-geometry-msgs, python3-nav-msgs, python3-sensor-msgs, python3-sphinx, python3-std-msgs, python3-tf2, python3-tf2-msgs, python3-tf2-ros, python3-visualization-msgs, ros-environment, ros-geometry-msgs, ros-jazzy-builtin-interfaces, ros-jazzy-cartographer, ros-jazzy-cartographer-ros-msgs, ros-jazzy-rclcpp, ros-jazzy-rosbag2-cpp, ros-jazzy-rosbag2-storage, ros-nav-msgs, ros-sensor-msgs, ros-std-msgs, ros-tf2-msgs, ros-visualization-msgs, ros-jazzy-ros-workspace
+Homepage: https://github.com/cartographer-project/cartographer_ros
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-cartographer-ros
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libabsl-dev, libeigen3-dev, libgeometry-msgs-dev, libgflags-dev, libgoogle-glog-dev, libnav-msgs-dev, libpcl-conversions-dev, libpcl-dev, librobot-state-publisher-dev, libsensor-msgs-dev, libstd-msgs-dev, libtf2-dev, libtf2-eigen-dev, libtf2-msgs-dev, libtf2-ros-dev, liburdf-dev, libvisualization-msgs-dev, python3-geometry-msgs, python3-nav-msgs, python3-sensor-msgs, python3-std-msgs, python3-tf2, python3-tf2-msgs, python3-tf2-ros, python3-visualization-msgs, ros-geometry-msgs, ros-jazzy-builtin-interfaces, ros-jazzy-cartographer, ros-jazzy-cartographer-ros-msgs, ros-jazzy-launch, ros-jazzy-rclcpp, ros-jazzy-rosbag2-cpp, ros-jazzy-rosbag2-storage, ros-nav-msgs, ros-robot-state-publisher, ros-sensor-msgs, ros-std-msgs, ros-tf2-msgs, ros-visualization-msgs, ros-jazzy-ros-workspace
+Description: Cartographer is a system that provides real-time simultaneous localization and mapping (SLAM) in 2D and 3D across multiple platforms and sensor configurations.
+ This package provides Cartographer's ROS integration.
