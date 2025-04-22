@@ -1,1 +1,1 @@
-{"base": "bca183f", "parent": "debian/rolling/cartographer_ros_msgs", "previous": "0f1dcb4", "trim": "", "trimbase": ""}
+{"base": "6aeb53ab7485", "parent": "debian/kilted/cartographer_ros_msgs", "previous": "847f1b0edc1f", "trim": "", "trimbase": ""}
